@@ -8,7 +8,7 @@ public class CreateCharacter : MonoBehaviour
 {
     [SerializeField] GameObject character;
     [SerializeField] ARRaycastManager raycastManager;
-    [SerializeField] bool isSpawned = false;
+    public bool isSpawned = false;
 
     public void SpawnCharacter()
     {

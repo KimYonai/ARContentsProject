@@ -4,15 +4,73 @@ using UnityEngine;
 
 public class CharacterController : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public enum CharacterState { Idle, Interact, Annoying, Angry, Eat, Die }
+    [SerializeField] CharacterState curState;
+
+    private CreateCharacter character;
+
+    private void Start()
     {
-        
+        curState = CharacterState.Idle;
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        
+        switch (curState)
+        {
+            case CharacterState.Idle:
+                Idle();
+                break;
+
+            case CharacterState.Interact:
+                Interact();
+                break;
+
+            case CharacterState.Annoying:
+                Annoying();
+                break;
+
+            case CharacterState.Angry:
+                Angry();
+                break;
+
+            case CharacterState.Eat:
+                Eat();
+                break;
+
+            case CharacterState.Die:
+                Die();
+                break;
+        }
+    }
+
+    private void Idle()
+    {
+
+    }
+
+    private void Interact()
+    {
+
+    }
+
+    private void Annoying()
+    {
+
+    }
+
+    private void Angry()
+    {
+
+    }
+
+    private void Eat()
+    {
+
+    }
+
+    private void Die()
+    {
+
     }
 }

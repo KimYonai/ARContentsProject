@@ -7,8 +7,8 @@ public class CharacterModel : MonoBehaviour
     [SerializeField] int fullness;
     public int Fullness { get { return fullness; } set { fullness = value; } }
 
-    [SerializeField] int interActCount;
-    public int InterActCount { get { return interActCount; } set { interActCount = value; } }
+    [SerializeField] int interactCount;
+    public int InteractCount { get { return interactCount; } set { interactCount = value; } }
 
     [SerializeField] int stress;
     public int Stress { get { return stress; } set { stress = value; } }
