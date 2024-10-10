@@ -23,7 +23,7 @@ public class CreateCharacter : MonoBehaviour
 
         if (raycastManager.Raycast(ray, hits))
         {
-            Instantiate(character, hits[0].pose.position, hits[0].pose.rotation);
+            Instantiate(character, hits[0].pose.position, Quaternion.Euler(hits[0].pose.rotation.x, hits[0].pose.rotation.y - 180, hits[0].pose.rotation.z));
             isSpawned = true;
         }
     }
