@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class CharacterModel : MonoBehaviour
 {
-    [SerializeField] int fullness;
-    public int Fullness { get { return fullness; } set { fullness = value; } }
+    [SerializeField] float fullness;
+    public float Fullness { get { return fullness; } set { fullness = value; } }
 
     [SerializeField] int interactCount;
     public int InteractCount { get { return interactCount; } set { interactCount = value; } }
