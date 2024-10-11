@@ -24,6 +24,11 @@ public class CharacterController : MonoBehaviour
         TouchCharacter();
     }
 
+    private void LateUpdate()
+    {
+        transform.LookAt(Camera.main.transform);
+    }
+
     public void TouchCharacter()
     {
         if (Input.touchCount > 0)
