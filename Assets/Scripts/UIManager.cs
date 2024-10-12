@@ -2,13 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ButtonManager : MonoBehaviour
+public class UIManager : MonoBehaviour
 {
-    private static ButtonManager instance = null;
+    private static UIManager instance = null;
 
     private CharacterModel model;
 
-    public static ButtonManager Instance
+    public static UIManager Instance
     {
         get
         {
@@ -31,11 +31,6 @@ public class ButtonManager : MonoBehaviour
         {
             Destroy(this.gameObject);
         }
-    }
-
-    public void OnTouchEatButton()
-    {
-        model.Fullness += 10;
     }
 
     public void OnQuitButton()

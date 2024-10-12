@@ -1,20 +1,23 @@
 using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using UnityEngine;
 
 public class CharacterController : MonoBehaviour
 {
-    public enum State { Idle, Jump }
-    private State curState;
-
     [SerializeField] CharacterModel model;
     [SerializeField] Animator animator;
 
+    private float timer;
+    private float delayTime;
+
     private void Start()
     {
-        curState = State.Idle;
+        timer = 0;
+        delayTime = 1.5f;
         animator.SetBool("isTouch", false);
+        animator.SetBool("isEat", false);
     }
 
     private void Update()
@@ -37,21 +40,28 @@ public class CharacterController : MonoBehaviour
 
             if (touch.phase == TouchPhase.Began)
             {
-                //Vector2 touchDelta = touch.deltaPosition;
-                //Vector2 screenPos = touch.position;
-
                 RaycastHit hit;
                 var pos = Camera.main.ScreenPointToRay(touch.position);
                 var ray = Physics.Raycast(pos, out hit, LayerMask.GetMask("Slime"));
 
                 animator.SetBool("isTouch", true);
-                curState = State.Jump;
             }
             else if (touch.phase == TouchPhase.Ended)
             {
                 animator.SetBool("isTouch", false);
-                curState = State.Idle;
             }
+        }
+    }
+
+    public void OnTouchEatButton()
+    {
+        timer += Time.deltaTime;
+        animator.SetBool("isEat", true);
+        model.Fullness += 10;
+
+        if (timer >= delayTime)
+        {
+            animator.SetBool("isEat", false);
         }
     }
 }
