@@ -1,11 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class CharacterModel : MonoBehaviour
 {
-    [SerializeField] float fullness;
-    public float Fullness { get { return fullness; } set { fullness = value; } }
+    [SerializeField] int fullness;
+    public int Fullness { get { return fullness; } set { fullness = value; OnChanged?.Invoke(fullness); } }
+    public UnityAction<int> OnChanged;
+
+    [SerializeField] int maxFullness;
+    public int MaxFullness { get { return maxFullness; } }
 
     [SerializeField] int interactCount;
     public int InteractCount { get { return interactCount; } set { interactCount = value; } }

@@ -1,18 +1,36 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Text;
+using TMPro;
 using UnityEngine;
 
 public class CharacterView : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    private CharacterModel model;
+
+    private StringBuilder fullnessSB = new StringBuilder();
+
+    [SerializeField] TextMeshProUGUI fullnessText;
+
+    private void Start()
     {
-        
+        UpdateFullness(model.Fullness);
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnEnable()
     {
-        
+        model.OnChanged += UpdateFullness;
+    }
+
+    private void OnDisable()
+    {
+        model.OnChanged -= UpdateFullness;
+    }
+
+    private void UpdateFullness(int fullness)
+    {
+        fullnessSB.Clear();
+        fullnessSB.Append(fullness);
+        fullnessText.SetText(fullnessSB);
     }
 }

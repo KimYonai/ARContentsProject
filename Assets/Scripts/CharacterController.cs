@@ -2,12 +2,19 @@ using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CharacterController : MonoBehaviour
 {
+    [Header("Inspector")]
     [SerializeField] CharacterModel model;
     [SerializeField] Animator animator;
+
+    [Header("UI")]
+    [SerializeField] Slider fullnessSlider;
+    [SerializeField] TextMeshProUGUI fullnessText;
 
     private float timer;
     private float delayTime;
@@ -16,14 +23,14 @@ public class CharacterController : MonoBehaviour
     {
         timer = 0;
         delayTime = 1.5f;
+        fullnessSlider.maxValue = model.MaxFullness;
+        UpdateFullness(model.Fullness);
         animator.SetBool("isTouch", false);
         animator.SetBool("isEat", false);
     }
 
     private void Update()
     {
-        model.Fullness -= Time.deltaTime;
-
         TouchCharacter();
     }
 
@@ -45,6 +52,8 @@ public class CharacterController : MonoBehaviour
                 var ray = Physics.Raycast(pos, out hit, LayerMask.GetMask("Slime"));
 
                 animator.SetBool("isTouch", true);
+
+                model.Fullness -= 5;
             }
             else if (touch.phase == TouchPhase.Ended)
             {
@@ -63,5 +72,11 @@ public class CharacterController : MonoBehaviour
         {
             animator.SetBool("isEat", false);
         }
+    }
+
+    private void UpdateFullness(int fullness)
+    {
+        fullnessSlider.value = fullness;
+        fullnessText.text = $"{fullness}";
     }
 }

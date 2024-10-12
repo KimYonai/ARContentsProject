@@ -1,12 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Text;
+using TMPro;
 using UnityEngine;
 
 public class UIManager : MonoBehaviour
 {
     private static UIManager instance = null;
-
-    private CharacterModel model;
 
     public static UIManager Instance
     {
