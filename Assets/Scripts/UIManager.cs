@@ -8,6 +8,8 @@ public class UIManager : MonoBehaviour
 {
     private static UIManager instance = null;
 
+    private GameObject pauseWindow;
+
     public static UIManager Instance
     {
         get
@@ -31,6 +33,22 @@ public class UIManager : MonoBehaviour
         {
             Destroy(this.gameObject);
         }
+    }
+
+    private void Start()
+    {
+        pauseWindow = GameObject.Find("PauseWindow");
+        pauseWindow.SetActive(false);
+    }
+
+    public void OnPauseButton()
+    {
+        pauseWindow.SetActive(true);
+    }
+
+    public void OnBackButton()
+    {
+        pauseWindow.SetActive(false);
     }
 
     public void OnQuitButton()
