@@ -11,22 +11,17 @@ public class CharacterController : MonoBehaviour
     [Header("Inspector")]
     [SerializeField] CharacterModel model;
     [SerializeField] Animator animator;
+    [SerializeField] Collider characterCollider;
 
     [Header("UI")]
     [SerializeField] Slider fullnessSlider;
     [SerializeField] TextMeshProUGUI fullnessText;
 
-    private float timer;
-    private float delayTime;
-
     private void Start()
     {
-        timer = 0;
-        delayTime = 1.5f;
         fullnessSlider.maxValue = model.MaxFullness;
         UpdateFullness(model.Fullness);
-        animator.SetBool("isTouch", false);
-        animator.SetBool("isEat", false);
+        characterCollider = GetComponent<Collider>();
     }
 
     private void Update()
@@ -45,33 +40,22 @@ public class CharacterController : MonoBehaviour
         {
             Touch touch = Input.GetTouch(0);
 
-            if (touch.phase == TouchPhase.Began)
+            RaycastHit hit;
+            var pos = Camera.main.ScreenPointToRay(touch.position);
+            var ray = Physics.Raycast(pos, out hit, LayerMask.GetMask("Slime"));
+
+            if (touch.phase == TouchPhase.Began && hit.collider == characterCollider)
             {
-                RaycastHit hit;
-                var pos = Camera.main.ScreenPointToRay(touch.position);
-                var ray = Physics.Raycast(pos, out hit, LayerMask.GetMask("Slime"));
-
-                animator.SetBool("isTouch", true);
-
+                animator.Play("Attack");
                 model.Fullness -= 5;
-            }
-            else if (touch.phase == TouchPhase.Ended)
-            {
-                animator.SetBool("isTouch", false);
             }
         }
     }
 
     public void OnTouchEatButton()
     {
-        timer += Time.deltaTime;
-        animator.SetBool("isEat", true);
+        animator.Play("Jump");
         model.Fullness += 10;
-
-        if (timer >= delayTime)
-        {
-            animator.SetBool("isEat", false);
-        }
     }
 
     private void UpdateFullness(int fullness)
