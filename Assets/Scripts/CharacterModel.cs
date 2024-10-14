@@ -10,7 +10,7 @@ public class CharacterModel : MonoBehaviour
     public UnityAction<int> OnChanged;
 
     [SerializeField] int maxFullness;
-    public int MaxFullness { get { return maxFullness; } }
+    public int MaxFullness { get { return maxFullness; } set { maxFullness = value; } }
 
     [SerializeField] int interactCount;
     public int InteractCount { get { return interactCount; } set { interactCount = value; } }
